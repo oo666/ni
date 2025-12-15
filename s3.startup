@@ -1,0 +1,2 @@
+/etc/init.d/networking restart
+openvpn --config /etc/openvpn/server.conf

@@ -1,3 +1,9 @@
-/etc/init.d/networking stop
-sleep 2
-/etc/init.d/networking start
+/etc/init.d/networking restart
+/etc/init.d/ssh restart
+useradd -m -s /bin/bash ubuntu
+echo "ubuntu:password" | chpasswd
+mkdir -p /home/ubuntu/.ssh
+cat /shared/id_rsa.pub > /home/ubuntu/.ssh/authorized_keys
+chmod 700 /home/ubuntu/.ssh
+chmod 600 /home/ubuntu/.ssh/authorized_keys
+chown -R ubuntu:ubuntu /home/ubuntu

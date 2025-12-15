@@ -1,6 +1,3 @@
-/etc/init.d/networking stop
-sleep 2
-/etc/init.d/networking start
-ip route add 192.168.3.0/24 via 151.0.45.1
-sleep 5
+/etc/init.d/networking restart
 /etc/init.d/quagga start
+ip route add 192.168.88.0/24 via 151.0.45.1

@@ -1,11 +1,16 @@
 /etc/init.d/networking restart
 /etc/init.d/isc-dhcp-server start
 
-ip route add default scope global nexthop via 50.0.0.0 dev eth1 weight 1 nexthop via 50.0.0.2 dev eth2 weight 1
+ip route add 50.0.0.4/31 via 50.0.0.1
+ip route add 50.0.0.6/31 via 50.0.0.3
+ip route add default via 50.0.0.1  # Default verso r2 o r3
 
 iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
 iptables -t nat -A POSTROUTING -o eth2 -j MASQUERADE
 
-iptables -A FORWARD -d 192.168.1.0/24 -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A FORWARD -i eth0 -j ACCEPT
 
+iptables -A FORWARD -p tcp --dport 22 -d 192.168.1.0/24 -j ACCEPT
+iptables -A FORWARD -p tcp --dport 7070 -d 192.168.1.0/24 -j ACCEPT
 iptables -A FORWARD -d 192.168.1.0/24 -j DROP
