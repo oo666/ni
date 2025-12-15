@@ -1,0 +1,10 @@
+/etc/init.d/networking stop
+sleep 2
+/etc/init.d/networking start
+
+sleep 5
+
+ip route add 50.0.0.0/24 via 193.201.28.1
+ip route add 192.168.2.0/24 via 193.201.28.1
+
+/etc/init.d/quagga start

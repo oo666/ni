@@ -1,0 +1,5 @@
+/etc/init.d/networking stop
+sleep 2
+/etc/init.d/networking start
+sleep 5
+/etc/init.d/quagga start
