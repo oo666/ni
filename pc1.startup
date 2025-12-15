@@ -1,1 +1,12 @@
 /etc/init.d/networking restart
+
+useradd myuser2 -m
+echo -e 'password\npassword\n' | passwd myuser2
+
+cp /home/myuser2/.ssh/id_rsa.pub /shared
+
+mkdir -p /dev/net
+mknod /dev/net/tun c 10 200
+chmod 600 /dev/net/tun
+
+chmod 600 root/.ssh/id_rsa*
